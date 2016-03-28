@@ -9,8 +9,8 @@ public class DB_connection {
 	private static Connection c = null;
     private static Statement stmt = null;
     private static String url = "jdbc:postgresql://localhost:5432/planes";
-    private static String user = "postgres";
-    private static String pass = "innnes";
+    private static String user = "viktor";
+    private static String pass = "";
 	public static String findDep(){ 
     String s = null;
     try {
