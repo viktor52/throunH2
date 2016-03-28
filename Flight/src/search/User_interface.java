@@ -123,8 +123,7 @@ public class User_interface {
 				int b = children.getSelectedIndex()+1;
 				int c = infants.getSelectedIndex()+1;
 				Date f = Departure.getDate();
-				String d = Fs.searchReturn();
-				System.out.println("fullo "+a+", born "+b+", infant"+c +" "+ d);
+				System.out.println("fullo "+a+", born "+b+", infant"+c);
 				System.out.println(f);
 			}
 		});

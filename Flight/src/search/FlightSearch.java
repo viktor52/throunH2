@@ -1,6 +1,10 @@
 package search;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 //import java.util.ArrayList;
 
@@ -10,7 +14,23 @@ public class FlightSearch {
 	static DB_connection db = new DB_connection();
 	
 	public static List<Flight> searchDeparture(Date Dtime, int ppltrav, String To, String From){
-		return null;
+			List<Flight> s = null;
+		    List<Flight> flight= new ArrayList<Flight>();
+		    Flight = null;
+		    try {
+			      List rs = db.find( "SELECT * FROM flight;" );
+			      //Iterator itr = rs.iterator();
+			      while ( rs.next() ) {
+			            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
+			            		rs.getDate("depdate"),rs.getString("price"));
+			            flight.add(s);
+			         }
+		    }
+		    catch (Exception e) {
+		       e.printStackTrace();
+		       System.err.println(e.getClass().getName()+": "+e.getMessage());
+		       System.exit(0);
+		    }
 	}
 	public static List<Flight> searchReturn(Date Rtime, int ppltrav, String To, String From){
 		return null;
