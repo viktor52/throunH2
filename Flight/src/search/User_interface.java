@@ -69,7 +69,7 @@ public class User_interface {
 		Result.setBounds(309, 202, 104, 16);
 		frame.getContentPane().add(Result);
 		
-		JDateChooser Departure = new JDateChooser();
+		final JDateChooser Departure = new JDateChooser();
 		Departure.setBounds(19, 43, 123, 28);
 		frame.getContentPane().add(Departure);
 		
@@ -85,12 +85,12 @@ public class User_interface {
 		lblReturn.setBounds(174, 15, 61, 16);
 		frame.getContentPane().add(lblReturn);
 		
-		JComboBox adult = new JComboBox();
+		final JComboBox adult = new JComboBox();
 		adult.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
 		adult.setBounds(19, 110, 61, 27);
 		frame.getContentPane().add(adult);
 		
-		JComboBox children = new JComboBox();
+		final JComboBox children = new JComboBox();
 		children.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
 		children.setBounds(134, 110, 61, 27);
 		frame.getContentPane().add(children);
@@ -103,7 +103,7 @@ public class User_interface {
 		lblChildren.setBounds(134, 93, 61, 16);
 		frame.getContentPane().add(lblChildren);
 		
-		JComboBox infants = new JComboBox();
+		final JComboBox infants = new JComboBox();
 		infants.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
 		infants.setBounds(19, 164, 61, 27);
 		frame.getContentPane().add(infants);
