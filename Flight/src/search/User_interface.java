@@ -22,6 +22,7 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
 import search.FlightSearch;
+import search.Flight;
 
 public class User_interface {
 
@@ -125,10 +127,10 @@ public class User_interface {
 				int b = children.getSelectedIndex()+1;
 				int c = infants.getSelectedIndex()+1;
 				Date f = Departure.getDate();
-				 = Fs.searchDeparture(f, a, "", "");
+				List ad = new ArrayList();
+				ad.add(Fs.searchDeparture(f, a, "", ""));
 				System.out.println("fullo "+a+", born "+b+", infant"+c);
-				System.out.println(f);
-				System.out.println(Arrays.toString(s));
+				System.out.println();
 				
 			}
 		});

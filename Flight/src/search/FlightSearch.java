@@ -9,6 +9,7 @@ import java.util.List;
 import java.sql.Statement;
 
 
+
 import search.DB_connection;
 
 public class FlightSearch {
@@ -32,10 +33,30 @@ public class FlightSearch {
 		       System.err.println(e.getClass().getName()+": "+e.getMessage());
 		       System.exit(0);
 		    }
+		    System.out.println(flight);
 		    return flight;
+		    
 	}
 	public static List<Flight> searchReturn(Date Rtime, int ppltrav, String To, String From){
-		return null;
+		Flight s = null;
+	    List<Flight> flight= new ArrayList<Flight>();
+	    //flight = null;
+	    try {
+	    	ResultSet rs = db.find( "SELECT * FROM flight;" );
+		      //Iterator itr = rs.iterator();
+		      while ( rs.next() ) {
+		            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
+		            		rs.getDate("depdate"),rs.getString("price"));
+		            flight.add(s);
+		         }
+	    }
+	    catch (Exception e) {
+	       e.printStackTrace();
+	       System.err.println(e.getClass().getName()+": "+e.getMessage());
+	       System.exit(0);
+	    }
+	    System.out.println(flight);
+	    return flight;
 	}
 
 }
