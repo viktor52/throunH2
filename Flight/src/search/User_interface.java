@@ -22,7 +22,9 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -123,8 +125,11 @@ public class User_interface {
 				int b = children.getSelectedIndex()+1;
 				int c = infants.getSelectedIndex()+1;
 				Date f = Departure.getDate();
+				 = Fs.searchDeparture(f, a, "", "");
 				System.out.println("fullo "+a+", born "+b+", infant"+c);
 				System.out.println(f);
+				System.out.println(Arrays.toString(s));
+				
 			}
 		});
 		btnLeit.setBounds(309, 230, 117, 29);

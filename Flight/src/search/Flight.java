@@ -7,12 +7,12 @@ public class Flight {
 	private String flightNO;
 	private Date DepartureTime;
 	private Date ArrivalTime;
-	private int Price;
+	private String Price;
 	private String to;
 	private String from;
 	private int seatsAvailable;
 	
-	public Flight(String flightNO, Date DepartureTime, Date ArrivalTime, int Price, String to, String from, int seatsAvailable){
+	public Flight(String flightNO,  String to, String from,  Date DepartureTime, String Price){
 		this.flightNO = flightNO;
 		this.DepartureTime = DepartureTime;
 		this.ArrivalTime = ArrivalTime;
@@ -31,7 +31,7 @@ public class Flight {
 	public String getflightNO(){
 		return flightNO;
 	}
-	public int getPrice(){
+	public String getPrice(){
 		return Price;
 	}
 	public String getto(){
