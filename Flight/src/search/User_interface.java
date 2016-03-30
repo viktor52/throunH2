@@ -116,7 +116,7 @@ public class User_interface {
 		lblInfants.setBounds(29, 149, 61, 16);
 		frame.getContentPane().add(lblInfants);
 		
-		JCheckBox RountTrip = new JCheckBox("Rount trip");
+		JCheckBox RountTrip = new JCheckBox("Round trip");
 		RountTrip.setBounds(322, 30, 104, 50);
 		frame.getContentPane().add(RountTrip);
 		
