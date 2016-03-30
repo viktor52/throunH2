@@ -11,36 +11,38 @@ import org.junit.Test;
 import search.Flight;
 
 public class TestF {
-	String number;
-	String from;
-	String to;
-	Date deb; 
-	String price;
-	Flight f = new Flight("ff", "kef", "ak", new Date(), "100K");
+	Flight f;
 	
 	@Before
 	public void setUp(){
-		number = f.getflightNO();
-		from = f.getfrom();
-		to = f.getto();
-		deb = f.getDepartureTime();
-		price = f.getPrice();
+		f = new Flight("ff", "kef", "ak", new Date(), "100K");
 		
 	}
 	
 	@After
 	public void tearDown(){
-		number = null;
-		from = null;
-		to = null;
-		deb = null;
-		price = null;
+		f = null;
 		
 	}
 
 	@Test
-	public void test() {
-		assertEquals("ff",number);
+	public void testFlightNumber() {
+		assertEquals("ff",f.getflightNO());
+	}
+	
+	@Test
+	public void testFrom(){
+		assertEquals("ak",f.getfrom());
+	}
+	
+	@Test
+	public void testTo() {
+		assertEquals("kef",f.getTo());
+	}
+	
+	@Test
+	public void testPrice() {
+		assertEquals("100K",f.getPrice());
 	}
 
 }

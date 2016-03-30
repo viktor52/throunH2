@@ -34,7 +34,7 @@ public class Flight {
 	public String getPrice(){
 		return Price;
 	}
-	public String getto(){
+	public String getTo(){
 		return to;
 	}
 	public String getfrom(){

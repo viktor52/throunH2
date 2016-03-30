@@ -130,8 +130,8 @@ public class User_interface {
 				List ad = new ArrayList();
 				ad.add(Fs.searchDeparture(f, a, "", ""));
 				System.out.println("fullo "+a+", born "+b+", infant"+c);
-				System.out.println();
-				
+				System.out.println(f);
+
 			}
 		});
 		btnLeit.setBounds(309, 230, 117, 29);
