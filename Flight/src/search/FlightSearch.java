@@ -20,7 +20,8 @@ public class FlightSearch {
 		    List<Flight> flight= new ArrayList<Flight>();
 		    //flight = null;
 		    try {
-		    	ResultSet rs = db.find( "SELECT * FROM flight;" );
+		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
+		    			+ "AND departureairport = '"+ From +"';" );
 			      //Iterator itr = rs.iterator();
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
