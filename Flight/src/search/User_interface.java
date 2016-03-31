@@ -14,6 +14,8 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JComboBox;
 
+import static org.junit.Assert.assertEquals;
+
 import java.awt.Choice;
 import java.awt.Color;
 
@@ -22,9 +24,12 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -35,7 +40,8 @@ import search.Flight;
 public class User_interface {
 
 	private JFrame frame;
-	FlightSearch Fs = new FlightSearch();
+	FlightSearch fs = new FlightSearch();
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * Launch the application.
@@ -90,12 +96,12 @@ public class User_interface {
 		frame.getContentPane().add(lblReturn);
 		
 		final JComboBox adult = new JComboBox();
-		adult.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
+		adult.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
 		adult.setBounds(19, 110, 61, 27);
 		frame.getContentPane().add(adult);
 		
 		final JComboBox children = new JComboBox();
-		children.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
+		children.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
 		children.setBounds(134, 110, 61, 27);
 		frame.getContentPane().add(children);
 		
@@ -108,7 +114,7 @@ public class User_interface {
 		frame.getContentPane().add(lblChildren);
 		
 		final JComboBox infants = new JComboBox();
-		infants.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
+		infants.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
 		infants.setBounds(19, 164, 61, 27);
 		frame.getContentPane().add(infants);
 		
@@ -120,22 +126,48 @@ public class User_interface {
 		RountTrip.setBounds(322, 30, 104, 50);
 		frame.getContentPane().add(RountTrip);
 		
-		JButton btnLeit = new JButton("Leita");
+		final JComboBox from = new JComboBox();
+		from.setModel(new DefaultComboBoxModel(new String[] {"KEF", "EGS", "AEY", "RKV", "IFJ", "GRY", "THO", "VPN"}));
+		from.setBounds(319, 110, 74, 27);
+		frame.getContentPane().add(from);
+		
+		final JComboBox todest = new JComboBox();
+		todest.setModel(new DefaultComboBoxModel(new String[] {"KEF", "EGS", "AEY", "RKV", "IFJ", "GRY", "THO", "VPN"}));
+		todest.setBounds(319, 164, 74, 27);
+		frame.getContentPane().add(todest);
+		
+		JButton btnLeit = new JButton("Search");
 		btnLeit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a = adult.getSelectedIndex()+1;
 				int b = children.getSelectedIndex()+1;
 				int c = infants.getSelectedIndex()+1;
+				String fra = from.getSelectedItem().toString();
+				String til = todest.getSelectedItem().toString();
 				Date f = Departure.getDate();
-				List ad = new ArrayList();
-				ad.add(Fs.searchDeparture(f, a, "", ""));
+				String dep = df.format(f);
+				List<Flight> ad = fs.searchDeparture(dep, 1, fra, til);
 				System.out.println("fullo "+a+", born "+b+", infant"+c);
 				System.out.println(f);
-
+				Iterator<Flight> itr = ad.iterator();
+				while(itr.hasNext()){
+					Flight k  = itr.next();
+					System.out.println(k.getflightNO()+","+k.getfrom()+","+k.getTo()+","+k.getPrice());
+				}
+				System.out.println(fra+", "+til);
 			}
 		});
 		btnLeit.setBounds(309, 230, 117, 29);
 		frame.getContentPane().add(btnLeit);
+		
+		
+		JLabel lblNewLabel = new JLabel("From");
+		lblNewLabel.setBounds(322, 93, 61, 16);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblTo = new JLabel("To");
+		lblTo.setBounds(322, 149, 61, 16);
+		frame.getContentPane().add(lblTo);
 	}
 
 	protected int getInt(JTextField tala12) {

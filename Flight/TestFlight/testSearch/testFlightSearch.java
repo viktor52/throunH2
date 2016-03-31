@@ -31,7 +31,7 @@ public class testFlightSearch {
 
 	@Test
 	public void testsearchArrivalAirport() {
-		List<Flight> s  = fs.searchDeparture(new Date(), 1, "kef", "ak");
+		List<Flight> s  = fs.searchDeparture("2016-09-09", 1, "KEF", "AEY");
 		Iterator<Flight> itr = s.iterator();
 		while(itr.hasNext()){
 			Flight k  = itr.next();
@@ -42,7 +42,7 @@ public class testFlightSearch {
 	
 	@Test
 	public void testsearchDepartureAirport(){
-		List<Flight> s  = fs.searchDeparture(new Date(), 1, "kef", "ak");
+		List<Flight> s  = fs.searchDeparture("2016-09-09", 1, "KEF", "AEY");
 		Iterator<Flight> itr = s.iterator();
 		while(itr.hasNext()){
 			Flight k  = itr.next();

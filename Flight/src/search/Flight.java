@@ -1,7 +1,6 @@
 package search;
 import java.util.Date;
 
-//import search.FlightSearch;
 public class Flight {
 	
 	private String flightNO;
@@ -12,7 +11,7 @@ public class Flight {
 	private String from;
 	private int seatsAvailable;
 	
-	public Flight(String flightNO,  String to, String from,  Date DepartureTime, String Price){
+	public Flight(String flightNO,  String from, String to,  Date DepartureTime, String Price){
 		this.flightNO = flightNO;
 		this.DepartureTime = DepartureTime;
 		this.ArrivalTime = ArrivalTime;

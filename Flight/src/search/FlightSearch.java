@@ -15,14 +15,13 @@ import search.DB_connection;
 public class FlightSearch {
 	static DB_connection db = new DB_connection();
 	
-	public static List<Flight> searchDeparture(Date Dtime, int ppltrav, String To, String From){
+	public static List<Flight> searchDeparture(String Ddate , int ppltrav, String To, String From){
 			Flight s = null;
 		    List<Flight> flight= new ArrayList<Flight>();
 		    //flight = null;
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-		    			+ "AND departureairport = '"+ From +"';" );
-			      //Iterator itr = rs.iterator();
+		    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Ddate+"'"+"integer '9';" );
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
@@ -44,7 +43,6 @@ public class FlightSearch {
 	    //flight = null;
 	    try {
 	    	ResultSet rs = db.find( "SELECT * FROM flight;" );
-		      //Iterator itr = rs.iterator();
 		      while ( rs.next() ) {
 		            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
 		            		rs.getDate("depdate"),rs.getString("price"));
