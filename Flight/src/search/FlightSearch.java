@@ -21,7 +21,7 @@ public class FlightSearch {
 		    //flight = null;
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-		    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Ddate+"'"+"integer '9';" );
+		    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Ddate+"';" );
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
