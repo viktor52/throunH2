@@ -17,15 +17,14 @@ public class FlightSearch {
 	
 	public static List<Flight> searchDeparture(String Ddate , int ppltrav, String To, String From){
 			Flight s = null;
-		    List<Flight> flight= new ArrayList<Flight>();
-		    //flight = null;
+		    List<Flight> dflight= new ArrayList<Flight>();
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
 		    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Ddate+"';" );
 			      while ( rs.next() ) {
-			            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
+			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
-			            flight.add(s);
+			            dflight.add(s);
 			         }
 		    }
 		    catch (Exception e) {
@@ -33,20 +32,20 @@ public class FlightSearch {
 		       System.err.println(e.getClass().getName()+": "+e.getMessage());
 		       System.exit(0);
 		    }
-		    System.out.println(flight);
-		    return flight;
+		    System.out.println(dflight);
+		    return dflight;
 		    
 	}
-	public static List<Flight> searchReturn(Date Rtime, int ppltrav, String To, String From){
+	public static List<Flight> searchReturn(String Rdate, int ppltrav, String From, String To){
 		Flight s = null;
-	    List<Flight> flight= new ArrayList<Flight>();
-	    //flight = null;
+	    List<Flight> rflight= new ArrayList<Flight>();
 	    try {
-	    	ResultSet rs = db.find( "SELECT * FROM flight;" );
+	    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
+	    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Rdate+"';" );
 		      while ( rs.next() ) {
-		            s = new Flight(rs.getString("number"), rs.getString("arivalairport"), rs.getString("departureairport"), 
+		            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 		            		rs.getDate("depdate"),rs.getString("price"));
-		            flight.add(s);
+		            rflight.add(s);
 		         }
 	    }
 	    catch (Exception e) {
@@ -54,8 +53,8 @@ public class FlightSearch {
 	       System.err.println(e.getClass().getName()+": "+e.getMessage());
 	       System.exit(0);
 	    }
-	    System.out.println(flight);
-	    return flight;
+	    System.out.println(rflight);
+	    return rflight;
 	}
 
 }

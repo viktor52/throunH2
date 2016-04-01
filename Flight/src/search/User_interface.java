@@ -83,7 +83,7 @@ public class User_interface {
 		Departure.setBounds(19, 43, 123, 28);
 		frame.getContentPane().add(Departure);
 		
-		JDateChooser Returning = new JDateChooser();
+		final JDateChooser Returning = new JDateChooser();
 		Returning.setBounds(174, 43, 123, 28);
 		frame.getContentPane().add(Returning);
 		
@@ -146,15 +146,20 @@ public class User_interface {
 				String til = todest.getSelectedItem().toString();
 				Date f = Departure.getDate();
 				String dep = df.format(f);
-				List<Flight> ad = fs.searchDeparture(dep, 1, fra, til);
-				System.out.println("fullo "+a+", born "+b+", infant"+c);
-				System.out.println(f);
+				Date t = Returning.getDate();
+				String ar = df.format(t);
+				List<Flight> ad = fs.searchDeparture(dep, 1, til, fra);
 				Iterator<Flight> itr = ad.iterator();
 				while(itr.hasNext()){
 					Flight k  = itr.next();
-					System.out.println(k.getflightNO()+","+k.getfrom()+","+k.getTo()+","+k.getPrice());
+					System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
 				}
-				System.out.println(fra+", "+til);
+				List<Flight> re = fs.searchReturn(ar, 1, til, fra);
+				Iterator<Flight> iter = re.iterator();
+				while(iter.hasNext()){
+					Flight k  = iter.next();
+					System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
+				}
 			}
 		});
 		btnLeit.setBounds(309, 230, 117, 29);
