@@ -1,6 +1,6 @@
 package search;
 
 public interface Seats {
-	int isAvailable(int x);
+	int[] isAvailable();
 	void getEmpty();
 }
