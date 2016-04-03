@@ -2,11 +2,15 @@ package search;
 
 public class MockSeating implements Seats {
 	private boolean[][] seats;
+	private int row;
+	private int col;
 	
 	public MockSeating(int row, int col, String flightNO){
 
 		seats = new boolean[row][col];
-		/*
+		this.row = row;
+		this.col = col;
+		
 		int random;
 		for(int i = 0; i < row; i++){
 			for(int u = 0; u < col; u++){
@@ -17,21 +21,42 @@ public class MockSeating implements Seats {
 					seats[i][u] = false;
 			}
 		}
-		*/
 		
+/*
 		seats[0][0] = true;
 		seats[1][0] = true;
 		seats[0][1] = false;
 		seats[1][1] = false;
-	
+*/
 	}
 
 	
-	public void getEmpty() {
-		// TODO Auto-generated method stub
-		
+	public String[] getEmpty() {
+		int counter=0;
+		for(int i = 0; i < row; i++){
+			for(int u = 0; u < col; u++){
+				if(seats[i][u] = true){
+					counter++;
+				}
+			}
+		}
+		String[] emptyArray = new String[counter];
+		int counter2 = 0;
+		for(int i = 0; i < row; i++){
+			for(int u = 0; u < col; u++){
+				if(seats[i][u] = true){
+					emptyArray[counter2] = seatToString(i, u);
+					counter2++;
+				}
+			}
+		}
+		return emptyArray;
 	}
 
+	public void makeSeatFalse(String seatString){
+		int[] x = stringToSeat(seatString);
+		seats[x[0]][x[1]] = false;
+	}
 	
 	public boolean isAvailable(String seatString) {
 		int [] x = stringToSeat(seatString);

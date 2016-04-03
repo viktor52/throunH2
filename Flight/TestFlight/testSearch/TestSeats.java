@@ -34,7 +34,7 @@ public class TestSeats {
 			assertEquals(1,y[1]);
 		}
 	}
-	
+/*
 	@Test
 	public void testisAvailable(){
 		assertEquals(true,s.isAvailable("1-A"));
@@ -51,5 +51,16 @@ public class TestSeats {
 	public void testisAvailable4(){
 		assertEquals(false,s.isAvailable("2-B"));
 	}
-
+*/
+	@Test
+	public void testgetEmpty(){
+		String[] array = s.getEmpty();
+		System.out.println(array[0]);
+		for(int i = 0; i<array.length-1; i++){
+			assertTrue(s.isAvailable(array[i]));
+		}
+	}
+	
+	
+	
 }
