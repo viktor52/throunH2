@@ -8,27 +8,48 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestSeats {
-	MockSeating s = new MockSeating();
-	int[] x = s.isAvailable();
-	boolean[] y;
-/*	@Before
+	MockSeating s;
+	@Before
 	public void setUp(){
-		for(int i = 0; i<10; i++){
-			x[i] = i;
-		}
-		for(int e = 0; e<10; e++){
-			y[e] = true;
-		}
-		System.out.print(x);
+		s = new MockSeating(2, 2, null);
 	}
 	@After
 	public void tearDown(){
 		s = null;
 	}
-*/	
-	@Test
-	public void test() {
 
+	@Test
+	public void testseatToString() {
+		assertEquals("1-A", s.seatToString(0, 0));
+	}
+	
+	@Test
+	public void teststringToSeat(){
+		int [] x = s.stringToSeat("1-A");
+		int [] y = s.stringToSeat("10-B");
+		if(x.length==2){
+			assertEquals(0,x[1]);
+		}
+		if(y.length == 3){
+			assertEquals(1,y[1]);
+		}
+	}
+	
+	@Test
+	public void testisAvailable(){
+		assertEquals(true,s.isAvailable("1-A"));
+	}
+	@Test
+	public void testisAvailable2(){
+		assertEquals(true,s.isAvailable("2-A"));
+	}
+	@Test
+	public void testisAvailable3(){
+		assertEquals(false,s.isAvailable("1-B"));
+	}
+	@Test
+	public void testisAvailable4(){
+		assertEquals(false,s.isAvailable("2-B"));
 	}
 
 }
