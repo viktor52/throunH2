@@ -1,6 +1,9 @@
 package search;
 
 public interface Seats {
-	int[] isAvailable();
-	void getEmpty();
+	public boolean isAvailable();
+	public void getEmpty();
+	public String seatToString();
+	public String stringToSeat();
+	
 }

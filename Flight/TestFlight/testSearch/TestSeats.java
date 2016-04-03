@@ -28,8 +28,7 @@ public class TestSeats {
 */	
 	@Test
 	public void test() {
-		y[0] = true;
-		assertEquals(x[1],s.isAvailable()[1]);
+
 	}
 
 }

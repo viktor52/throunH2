@@ -1,32 +1,37 @@
 package search;
 
 public class MockSeating implements Seats {
-private int [] xs;
 
+	private boolean[][] seats;
 
-	/*
-	public boolean isAvailable(int x) {
-		return true;
+	public MockSeating(int row, int col, String flightNO){
+		
 	}
-*/
-	@Override
+
+	
 	public void getEmpty() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	
-	public int [] isAvailable() {
-		xs = null;
-		boolean []y = null;
-		for(int i = 0; i<10; i++){
-			xs[i] = i;
-		}
-		for(int e = 0; e<10; e++){
-			y[e] = true;
-		}
-		System.out.print(xs);		
-		return xs;
+	public boolean isAvailable() {
+		
+		return true;
 	}
 
+
+	
+	public String seatToString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+	public String stringToSeat() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
