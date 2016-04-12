@@ -7,8 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.sql.Statement;
-
-
+import java.text.SimpleDateFormat;
 
 import search.DB_connection;
 
@@ -20,11 +19,15 @@ public class FlightSearch {
 		    List<Flight> dflight= new ArrayList<Flight>();
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-		    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Ddate+"';" );
+		    			+ "AND departureairport = '"+ From +"';" );
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
-			            dflight.add(s);
+			            if(isInBound(s)){
+			            	dflight.add(s);
+			            }
+			            
+			            
 			         }
 		    }
 		    catch (Exception e) {
@@ -36,6 +39,7 @@ public class FlightSearch {
 		    return dflight;
 		    
 	}
+
 	public static List<Flight> searchReturn(String Rdate, int ppltrav, String From, String To){
 		Flight s = null;
 	    List<Flight> rflight= new ArrayList<Flight>();
@@ -55,6 +59,19 @@ public class FlightSearch {
 	    }
 	    System.out.println(rflight);
 	    return rflight;
+	}
+	private static boolean isInBound(Flight s) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date fullDate = s.getDepartureTime();
+		String sDate = df.format(fullDate);
+		String[] parts = sDate.split("-");
+		int[] intParts = new int[parts.length];
+		for(int i = 0; i< parts.length; i++){
+			intParts[i] = Integer.parseInt(parts[i]);
+		}
+		
+		System.out.println(intParts[0]);
+		return true;
 	}
 
 }

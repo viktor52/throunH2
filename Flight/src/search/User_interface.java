@@ -145,15 +145,18 @@ public class User_interface {
 				String fra = from.getSelectedItem().toString();
 				String til = todest.getSelectedItem().toString();
 				Date f = Departure.getDate();
+				System.out.println(f+" venjulegt");
 				String dep = df.format(f);
+				System.out.println(df.format(f));
 				Date t = Returning.getDate();
 				String ar = df.format(t);
 				List<Flight> ad = fs.searchDeparture(dep, 1, til, fra);
 				Iterator<Flight> itr = ad.iterator();
-				while(itr.hasNext()){
-					Flight k  = itr.next();
-					System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
-				}
+					while(itr.hasNext()){
+						Flight k  = itr.next();
+						System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
+					}
+				
 				List<Flight> re = fs.searchReturn(ar, 1, til, fra);
 				Iterator<Flight> iter = re.iterator();
 				while(iter.hasNext()){
