@@ -22,12 +22,6 @@ public class MockSeating implements Seats {
 			}
 		}
 		
-/*
-		seats[0][0] = true;
-		seats[1][0] = true;
-		seats[0][1] = false;
-		seats[1][1] = false;
-*/
 	}
 
 	
