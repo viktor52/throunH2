@@ -18,7 +18,7 @@ public class FlightSearch {
 	static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	static Calendar cal = Calendar.getInstance();
 	
-	public static List<Flight> searchDeparture(Date Ddate, int ppltrav, String To, String From){
+	public static List<Flight> searchDeparture(Date Ddate, int adult,int children,int inf, String To, String From){
 		String sDate = df.format(Ddate);
 		Date leftDate = null;
 		try {
@@ -50,9 +50,6 @@ public class FlightSearch {
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
-			            if(isInBound(s)){
-			            	dflight.add(s);
-			            }
 			            
 			            
 			         }
@@ -67,7 +64,31 @@ public class FlightSearch {
 		    
 	}
 
-	public static List<Flight> searchReturn(String Rdate, int ppltrav, String From, String To){
+	public static List<Flight> searchReturn(Date Rdate, int adult,int children,int inf, String From, String To){
+		String sDate = df.format(Rdate);
+		Date leftDate = null;
+		try {
+			leftDate = df.parse(sDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cal.setTime(leftDate);
+		cal.add(Calendar.DATE, -3);
+		sDate = df.format(cal.getTime());
+		
+		String eDate = df.format(Rdate);
+		Date rightDate = null;
+		try {
+			rightDate = df.parse(eDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cal.setTime(rightDate);
+		cal.add(Calendar.DATE, 3);
+		eDate = df.format(cal.getTime());
+		
 		Flight s = null;
 	    List<Flight> rflight= new ArrayList<Flight>();
 	    try {
@@ -87,18 +108,6 @@ public class FlightSearch {
 	    System.out.println(rflight);
 	    return rflight;
 	}
-	private static boolean isInBound(Flight s) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date fullDate = s.getDepartureTime();
-		String sDate = df.format(fullDate);
-		String[] parts = sDate.split("-");
-		int[] intParts = new int[parts.length];
-		for(int i = 0; i< parts.length; i++){
-			intParts[i] = Integer.parseInt(parts[i]);
-		}
-		
-		System.out.println(intParts[0]);
-		return true;
-	}
+
 
 }
