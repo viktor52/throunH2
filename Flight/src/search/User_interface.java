@@ -28,6 +28,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -42,7 +43,6 @@ public class User_interface {
 	private JFrame frame;
 	FlightSearch fs = new FlightSearch();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
 	/**
 	 * Launch the application.
 	 */
@@ -147,10 +147,9 @@ public class User_interface {
 				Date f = Departure.getDate();
 				System.out.println(f+" venjulegt");
 				String dep = df.format(f);
-				System.out.println(df.format(f));
 				Date t = Returning.getDate();
 				String ar = df.format(t);
-				List<Flight> ad = fs.searchDeparture(dep, 1, til, fra);
+				List<Flight> ad = fs.searchDeparture(f, 1, til, fra);
 				Iterator<Flight> itr = ad.iterator();
 					while(itr.hasNext()){
 						Flight k  = itr.next();

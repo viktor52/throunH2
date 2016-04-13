@@ -3,23 +3,50 @@ package search;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import search.DB_connection;
 
 public class FlightSearch {
 	static DB_connection db = new DB_connection();
+	static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	static Calendar cal = Calendar.getInstance();
 	
-	public static List<Flight> searchDeparture(String Ddate , int ppltrav, String To, String From){
+	public static List<Flight> searchDeparture(Date Ddate, int ppltrav, String To, String From){
+		String sDate = df.format(Ddate);
+		Date leftDate = null;
+		try {
+			leftDate = df.parse(sDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cal.setTime(leftDate);
+		cal.add(Calendar.DATE, -3);
+		sDate = df.format(cal.getTime());
+		
+		String eDate = df.format(Ddate);
+		Date rightDate = null;
+		try {
+			rightDate = df.parse(eDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cal.setTime(rightDate);
+		cal.add(Calendar.DATE, 3);
+		eDate = df.format(cal.getTime());
 			Flight s = null;
 		    List<Flight> dflight= new ArrayList<Flight>();
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-		    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+Ddate+"' AND '2016-07-02';" );
+		    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"';" );
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
