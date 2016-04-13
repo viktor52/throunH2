@@ -50,7 +50,7 @@ public class FlightSearch {
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
-			            
+			            dflight.add(s);
 			            
 			         }
 		    }

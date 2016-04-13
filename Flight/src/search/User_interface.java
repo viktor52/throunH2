@@ -20,6 +20,8 @@ import java.awt.Choice;
 import java.awt.Color;
 
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -32,17 +34,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 
 import search.FlightSearch;
 import search.Flight;
+import search.selectFlight;
 
 public class User_interface {
 
 	private JFrame frame;
 	FlightSearch fs = new FlightSearch();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	static selectFlight SF = new selectFlight();
 	/**
 	 * Launch the application.
 	 */
@@ -148,9 +153,16 @@ public class User_interface {
 				Date t = Returning.getDate();
 				List<Flight> ad = fs.searchDeparture(f, a,b,c, til, fra);
 				Iterator<Flight> itr = ad.iterator();
+				Vector<Vector<Object>> data = new Vector<Vector<Object>>();
 					while(itr.hasNext()){
 						Flight k  = itr.next();
 						System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
+				        Vector<Object> row = new Vector<Object>();
+				        row.add( k.getflightNO());
+				        row.add( k.getfrom());
+				        row.add( k.getTo());
+				        row.add(k.getPrice());
+				        data.add(row);
 					}
 				
 				List<Flight> re = fs.searchReturn(t, a,b,c, til, fra);
@@ -159,6 +171,22 @@ public class User_interface {
 					Flight k  = iter.next();
 					System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
 				}
+				//SF.tester();
+		        
+		        Vector<String> headers = new Vector<String>();
+		        headers.add("FlightNO");
+		        headers.add("FROM");
+		        headers.add( "TO");
+		        headers.add("price");
+		        
+		        JTable table = new JTable( data, headers );
+		        table.removeEditor();
+
+		        JFrame frame1 = new JFrame();
+		        frame1.add( new JScrollPane( table ));
+		        frame1.pack();
+		        frame1.setVisible( true ); 
+		        frame.dispose();
 			}
 		});
 		btnLeit.setBounds(309, 230, 117, 29);
