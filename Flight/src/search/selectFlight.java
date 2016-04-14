@@ -68,8 +68,13 @@ public class selectFlight extends JFrame {
         scrollPane.setBounds(40, 30, 517, 200);
         contentPane.add(scrollPane);
         table.removeEditor();
+<<<<<<< HEAD
 		/////////////////////////////////////////////////////
 		JLabel lblNewLabel_1 = new JLabel("Returnig Flights");
+=======
+		
+		JLabel lblNewLabel_1 = new JLabel("Returning Flights");
+>>>>>>> 7487647609628c26102129ade2d872c65bd6d654
 		lblNewLabel_1.setBounds(224, 242, 113, 15);
 		contentPane.add(lblNewLabel_1);
         
