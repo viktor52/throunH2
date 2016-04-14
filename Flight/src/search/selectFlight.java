@@ -59,7 +59,11 @@ public class selectFlight extends JFrame {
         lblNewLabel.setBounds(217, 3, 120, 15);
         contentPane.add(lblNewLabel);
         
-        final JTable table = new JTable( data2, headers2 );
+        final JTable table = new JTable( data2, headers2 ){
+        	  public boolean isCellEditable(int row, int column){
+        		    return false;
+        		  }
+        };
         table.setSurrendersFocusOnKeystroke(true);
         table.setBounds(1, 1, 450, 0);
         contentPane.add(table);
@@ -78,7 +82,11 @@ public class selectFlight extends JFrame {
 		lblNewLabel_1.setBounds(224, 242, 113, 15);
 		contentPane.add(lblNewLabel_1);
         
-		JTable table2 = new JTable( retdata2, headers2 );
+		JTable table2 = new JTable( retdata2, headers2 ){
+			  public boolean isCellEditable(int row, int column){
+				    return false;
+				  }
+		};
         //table2.setBounds(1, 1, 450, 0);
         contentPane.add(table2);
 
