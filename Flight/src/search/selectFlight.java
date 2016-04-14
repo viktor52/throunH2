@@ -43,7 +43,7 @@ public class selectFlight extends JFrame {
 	 */
 	public selectFlight(Vector<Vector<Object>> data2, Vector<String> headers2) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 550);
 		contentPane = new JPanel();
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,25 +51,32 @@ public class selectFlight extends JFrame {
         contentPane.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Departing flights");
-        lblNewLabel.setBounds(165, 10, 120, 15);
+        lblNewLabel.setBounds(217, 3, 120, 15);
         contentPane.add(lblNewLabel);
         JTable table = new JTable( data2, headers2 );
         table.setBounds(1, 1, 450, 0);
         contentPane.add(table);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(-1, 30, 453, 403);
+        scrollPane.setBounds(40, 30, 517, 200);
         contentPane.add(scrollPane);
         table.removeEditor();
 		
 		JLabel lblNewLabel_1 = new JLabel("Returnig Flights");
-		lblNewLabel_1.setBounds(133, 443, 113, 15);
+		lblNewLabel_1.setBounds(224, 242, 113, 15);
 		contentPane.add(lblNewLabel_1);
         
-      
+		JTable table2 = new JTable( data2, headers2 );
+        //table2.setBounds(1, 1, 450, 0);
+        contentPane.add(table2);
+
+        JScrollPane scrollPane_1 = new JScrollPane(table2);
+		scrollPane_1.setBounds(40, 280, 517, 184);
+		contentPane.add(scrollPane_1);
 		
 		JButton nextStep = new JButton("Next");
-		nextStep.setBounds(251, 438, 66, 25);
+		nextStep.setBounds(248, 476, 66, 25);
 		contentPane.add(nextStep);
+		
 	}
 	public static void getInfo(Date f, int a, int b, int c, String til, String fra){
 		EventQueue.invokeLater(new Runnable() {
@@ -106,5 +113,4 @@ public class selectFlight extends JFrame {
         
 
 	}
-
 }
