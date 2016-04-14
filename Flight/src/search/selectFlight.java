@@ -49,27 +49,5 @@ public class selectFlight extends JFrame {
 		
 
 	}
-	/*
-	public void tester(){
-        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-
-        Vector<Object> row = new Vector<Object>();
-        row.add( "Marie");
-        row.add( "Female");
-        row.add( 33);
-        data.add(row);
-        
-        Vector<String> headers = new Vector<String>();
-        headers.add("Name");
-        headers.add("Gender");
-        headers.add( "Age");
-        
-        JTable table = new JTable( data, headers );
-
-        JFrame frame = new JFrame();
-        frame.add( new JScrollPane( table ));
-        frame.pack();
-        frame.setVisible( true ); 
-	}*/
 
 }
