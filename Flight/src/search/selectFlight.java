@@ -82,7 +82,7 @@ public class selectFlight extends JFrame {
 		lblNewLabel_1.setBounds(224, 242, 113, 15);
 		contentPane.add(lblNewLabel_1);
         
-		JTable table2 = new JTable( retdata2, headers2 ){
+		final JTable table2 = new JTable( retdata2, headers2 ){
 			  public boolean isCellEditable(int row, int column){
 				    return false;
 				  }
@@ -95,6 +95,27 @@ public class selectFlight extends JFrame {
 		contentPane.add(scrollPane_1);
 		//////////////////////////////////////////////////////
 		JButton nextStep = new JButton("Next");
+		nextStep.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row =table.getSelectedRow();
+				int column = table.getColumnCount();
+				Object [] d = new Object[column];
+				for(int i = 0; i<column;i++){
+					d[i] = table.getValueAt(row, i);
+				}
+				System.out.println((String)d[0]);
+				
+				int rerow =table2.getSelectedRow();
+				int recolumn = table2.getColumnCount();
+				Object [] re = new Object[recolumn];
+				for(int i = 0; i<recolumn;i++){
+					re[i] = table2.getValueAt(row, i);
+				}
+				System.out.println((String)re[0]);
+			}
+		});
 		nextStep.setBounds(248, 476, 66, 25);
 		contentPane.add(nextStep);
 		
