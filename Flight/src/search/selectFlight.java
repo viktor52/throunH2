@@ -61,7 +61,7 @@ public class selectFlight extends JFrame {
         contentPane.add(scrollPane);
         table.removeEditor();
 		
-		JLabel lblNewLabel_1 = new JLabel("Returnig Flights");
+		JLabel lblNewLabel_1 = new JLabel("Returning Flights");
 		lblNewLabel_1.setBounds(224, 242, 113, 15);
 		contentPane.add(lblNewLabel_1);
         
