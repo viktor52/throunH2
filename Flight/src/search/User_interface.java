@@ -91,19 +91,36 @@ public class User_interface {
 		Departure.setBounds(19, 43, 123, 28);
 		frame.getContentPane().add(Departure);
 		
+		final JLabel lblReturn = new JLabel("Return");
+		lblReturn.setBounds(174, 15, 61, 16);
+		lblReturn.setVisible(false);
+		frame.getContentPane().add(lblReturn);
+		
 		final JDateChooser Returning = new JDateChooser();
 		Returning.setBounds(174, 43, 123, 28);
-		//Returning.setVisible(yes);
+		Returning.setVisible(false);
 		frame.getContentPane().add(Returning);
+		
+		final JCheckBox RountTrip = new JCheckBox("Round trip");
+		RountTrip.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				yes = RountTrip.isSelected();
+				Returning.setVisible(yes);
+				lblReturn.setVisible(yes);
+			}
+		});
+		RountTrip.setBounds(322, 30, 104, 50);
+		frame.getContentPane().add(RountTrip);
+		
+
 		
 		
 		JLabel lblDeparture = new JLabel("Departure");
 		lblDeparture.setBounds(19, 15, 86, 16);
 		frame.getContentPane().add(lblDeparture);
 		
-		JLabel lblReturn = new JLabel("Return");
-		lblReturn.setBounds(174, 15, 61, 16);
-		frame.getContentPane().add(lblReturn);
+		
 		
 		final JComboBox adult = new JComboBox();
 		adult.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
@@ -132,15 +149,6 @@ public class User_interface {
 		lblInfants.setBounds(29, 149, 61, 16);
 		frame.getContentPane().add(lblInfants);
 		
-		JCheckBox RountTrip = new JCheckBox("Round trip");
-		RountTrip.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				yes = true;
-			}
-		});
-
-		RountTrip.setBounds(322, 30, 104, 50);
-		frame.getContentPane().add(RountTrip);
 		
 		final JComboBox from = new JComboBox();
 		from.setModel(new DefaultComboBoxModel(new String[] {"KEF", "EGS", "AEY", "RKV", "IFJ", "GRY", "THO", "VPN"}));
