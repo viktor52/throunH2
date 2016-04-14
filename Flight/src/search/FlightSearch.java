@@ -46,7 +46,7 @@ public class FlightSearch {
 		    List<Flight> dflight= new ArrayList<Flight>();
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-		    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"';" );
+		    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 			            		rs.getDate("depdate"),rs.getString("price"));
@@ -64,7 +64,7 @@ public class FlightSearch {
 		    
 	}
 
-	public static List<Flight> searchReturn(Date Rdate, int adult,int children,int inf, String From, String To){
+	public static List<Flight> searchReturn(Date Rdate, int adult,int children,int inf, String To, String From){
 		String sDate = df.format(Rdate);
 		Date leftDate = null;
 		try {
@@ -88,15 +88,17 @@ public class FlightSearch {
 		cal.setTime(rightDate);
 		cal.add(Calendar.DATE, 3);
 		eDate = df.format(cal.getTime());
+		System.out.println(eDate);
 		
 		Flight s = null;
 	    List<Flight> rflight= new ArrayList<Flight>();
 	    try {
 	    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-	    			+ "AND departureairport = '"+ From +"'"+"AND depdate = '"+Rdate+"';" );
+	    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
 		      while ( rs.next() ) {
 		            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
 		            		rs.getDate("depdate"),rs.getString("price"));
+		            System.out.println(rs.getDate("depdate"));
 		            rflight.add(s);
 		         }
 	    }

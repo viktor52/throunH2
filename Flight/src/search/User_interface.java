@@ -41,12 +41,15 @@ import javax.swing.DefaultComboBoxModel;
 import search.FlightSearch;
 import search.Flight;
 import search.selectFlight;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class User_interface {
 
 	private JFrame frame;
 	FlightSearch fs = new FlightSearch();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	boolean yes = false;
 	//static selectFlight SF = new selectFlight();
 	/**
 	 * Launch the application.
@@ -90,7 +93,9 @@ public class User_interface {
 		
 		final JDateChooser Returning = new JDateChooser();
 		Returning.setBounds(174, 43, 123, 28);
+		//Returning.setVisible(yes);
 		frame.getContentPane().add(Returning);
+		
 		
 		JLabel lblDeparture = new JLabel("Departure");
 		lblDeparture.setBounds(19, 15, 86, 16);
@@ -128,6 +133,12 @@ public class User_interface {
 		frame.getContentPane().add(lblInfants);
 		
 		JCheckBox RountTrip = new JCheckBox("Round trip");
+		RountTrip.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				yes = true;
+			}
+		});
+
 		RountTrip.setBounds(322, 30, 104, 50);
 		frame.getContentPane().add(RountTrip);
 		
@@ -151,7 +162,7 @@ public class User_interface {
 				String til = todest.getSelectedItem().toString();
 				Date f = Departure.getDate();
 				Date t = Returning.getDate();
-				selectFlight.getInfo(f,a,b,c,til,fra);
+				selectFlight.getInfo(f,t,a,b,c,til,fra, yes);
 		        frame.dispose();
 			}
 		});
