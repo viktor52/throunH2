@@ -47,7 +47,7 @@ public class User_interface {
 	private JFrame frame;
 	FlightSearch fs = new FlightSearch();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	static selectFlight SF = new selectFlight();
+	//static selectFlight SF = new selectFlight();
 	/**
 	 * Launch the application.
 	 */
@@ -151,41 +151,7 @@ public class User_interface {
 				String til = todest.getSelectedItem().toString();
 				Date f = Departure.getDate();
 				Date t = Returning.getDate();
-				List<Flight> ad = fs.searchDeparture(f, a,b,c, til, fra);
-				Iterator<Flight> itr = ad.iterator();
-				Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-					while(itr.hasNext()){
-						Flight k  = itr.next();
-						System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
-				        Vector<Object> row = new Vector<Object>();
-				        row.add( k.getflightNO());
-				        row.add( k.getfrom());
-				        row.add( k.getTo());
-				        row.add(k.getPrice());
-				        data.add(row);
-					}
-				
-				List<Flight> re = fs.searchReturn(t, a,b,c, til, fra);
-				Iterator<Flight> iter = re.iterator();
-				while(iter.hasNext()){
-					Flight k  = iter.next();
-					System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
-				}
-				//SF.tester();
-		        
-		        Vector<String> headers = new Vector<String>();
-		        headers.add("FlightNO");
-		        headers.add("FROM");
-		        headers.add( "TO");
-		        headers.add("price");
-		        
-		        JTable table = new JTable( data, headers );
-		        table.removeEditor();
-
-		        JFrame frame1 = new JFrame();
-		        frame1.add( new JScrollPane( table ));
-		        frame1.pack();
-		        frame1.setVisible( true ); 
+				selectFlight.getInfo(f,a,b,c,til,fra);
 		        frame.dispose();
 			}
 		});

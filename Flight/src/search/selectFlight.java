@@ -2,51 +2,108 @@ package search;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-
+import java.util.Iterator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+
+
 import search.FlightSearch;
 import search.Flight;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.FlowLayout;
 
 public class selectFlight extends JFrame {
 
 	private JPanel contentPane;
-
+	static FlightSearch fs = new FlightSearch();
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	static Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+	static Vector<String> headers = new Vector<String>();
 	/**
 	 * Launch the application.
 	 */
+	
+	
 	public static void main(String[] args) {
 
         
-		EventQueue.invokeLater(new Runnable() {
-			
-			public void run() {
-				try {
-					selectFlight frame = new selectFlight();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public selectFlight() {
+	public selectFlight(Vector<Vector<Object>> data2, Vector<String> headers2) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 		
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("Departing flights");
+        lblNewLabel.setBounds(165, 10, 120, 15);
+        contentPane.add(lblNewLabel);
+        JTable table = new JTable( data2, headers2 );
+        table.setBounds(1, 1, 450, 0);
+        contentPane.add(table);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(-1, 30, 453, 403);
+        contentPane.add(scrollPane);
+        table.removeEditor();
+		
+		JLabel lblNewLabel_1 = new JLabel("Returnig Flights");
+		lblNewLabel_1.setBounds(133, 443, 113, 15);
+		contentPane.add(lblNewLabel_1);
+        
+      
+		
+		JButton nextStep = new JButton("Next");
+		nextStep.setBounds(251, 438, 66, 25);
+		contentPane.add(nextStep);
+	}
+	public static void getInfo(Date f, int a, int b, int c, String til, String fra){
+		EventQueue.invokeLater(new Runnable() {
+			
+			public void run() {
+				try {
+					selectFlight frame1 = new selectFlight(data, headers);
+					frame1.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		List<Flight> ad = fs.searchDeparture(f, a,b,c, til, fra);
+		Iterator<Flight> itr = ad.iterator();
+		
+			while(itr.hasNext()){
+				Flight k  = itr.next();
+				System.out.println(k.getflightNO()+", fra:"+k.getfrom()+", til:"+k.getTo()+","+k.getPrice());
+		        Vector<Object> row = new Vector<Object>();
+		        row.add( k.getflightNO());
+		        row.add( k.getfrom());
+		        row.add( k.getTo());
+		        row.add(k.getPrice());
+		        data.add(row);
+			}
+		//SF.tester();
+        
+        
+        headers.add("FlightNO");
+        headers.add("FROM");
+        headers.add( "TO");
+        headers.add("price");
+        
 
 	}
 
