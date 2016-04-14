@@ -1,5 +1,7 @@
 package search;
 
+import search.Seats;
+
 public class MockSeating implements Seats {
 	private boolean[][] seats;
 	private int row;

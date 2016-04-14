@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>testSearch</name>
-			<type>2</type>
-			<location>/Users/viktor/Documents/workspace/throunH2/Flight/TestFlight/testSearch</location>
-		</link>
-	</linkedResources>
 </projectDescription>
