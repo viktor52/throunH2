@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 
@@ -19,14 +20,17 @@ import search.Flight;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import search.Booking;
 
 public class selectFlight extends JFrame {
 
 	private JPanel contentPane;
+	JFrame frame;
 	static FlightSearch fs = new FlightSearch();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	static Vector<Vector<Object>> data = new Vector<Vector<Object>>();
@@ -35,31 +39,24 @@ public class selectFlight extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
-	
-	public static void main(String[] args) {
 
-        
-
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public selectFlight(Vector<Vector<Object>> data2,Vector<Vector<Object>> retdata2, Vector<String> headers2, 
 			final boolean yes, final int a, final int b, final int c ) {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 600, 550);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//contentPane = new JPanel();
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 550);
-		contentPane = new JPanel();
-		
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-        contentPane.setLayout(null);
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		frame.getContentPane().setLayout(null);
         //////////////////////////////////////////////////////
         JLabel lblNewLabel = new JLabel("Departing flights");
         lblNewLabel.setBounds(217, 3, 120, 15);
-        contentPane.add(lblNewLabel);
+        frame.getContentPane().add(lblNewLabel);
         
       
         
@@ -70,11 +67,11 @@ public class selectFlight extends JFrame {
         };
         table.setSurrendersFocusOnKeystroke(true);
         table.setBounds(1, 1, 450, 0);
-        contentPane.add(table);
+        frame.getContentPane().add(table);
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(40, 30, 517, 200);
-        contentPane.add(scrollPane);
+        frame.getContentPane().add(scrollPane);
         table.removeEditor();
 
 		/////////////////////////////////////////////////////
@@ -85,7 +82,7 @@ public class selectFlight extends JFrame {
 
 		lblNewLabel_1.setBounds(224, 242, 113, 15);
 		lblNewLabel_1.setVisible(yes);
-		contentPane.add(lblNewLabel_1);
+		frame.getContentPane().add(lblNewLabel_1);
         
 		final JTable table2 = new JTable( retdata2, headers2 ){
 			  public boolean isCellEditable(int row, int column){
@@ -94,12 +91,12 @@ public class selectFlight extends JFrame {
 		};
         //table2.setBounds(1, 1, 450, 0);
 		table2.setVisible(yes);
-        contentPane.add(table2);
+        frame.getContentPane().add(table2);
 
         JScrollPane scrollPane_1 = new JScrollPane(table2);
 		scrollPane_1.setBounds(40, 280, 517, 184);
 		scrollPane_1.setVisible(yes);
-		contentPane.add(scrollPane_1);
+		frame.getContentPane().add(scrollPane_1);
 		//////////////////////////////////////////////////////
 		JButton nextStep = new JButton("Next");
 		nextStep.addMouseListener(new MouseAdapter() {
@@ -113,7 +110,8 @@ public class selectFlight extends JFrame {
 					d[i] = table.getValueAt(row, i);
 				}
 				System.out.println((String)d[0]);
-				String arDate = null;
+				Date arDate = null;
+				String flightNrFr = null;
 				if(yes){
 					int rerow =table2.getSelectedRow();
 					int recolumn = table2.getColumnCount();
@@ -122,15 +120,20 @@ public class selectFlight extends JFrame {
 						re[i] = table2.getValueAt(row, i);
 					}
 					System.out.println((String)re[0]);
-					arDate = (String) re[3];
+					arDate = (Date) re[3];
+					flightNrFr = (String) re[0];
+					
 				}
-				String deDate = (String) d[3];
-				
-				
+				Date deDate = (Date) d[3];
+				int nrOfP = a+b;
+				int nrOfIn = c;
+				String flightNrTo = (String) d[0];
+				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate);
+				frame.dispose();
 			}
 		});
 		nextStep.setBounds(248, 476, 66, 25);
-		contentPane.add(nextStep);
+		frame.getContentPane().add(nextStep);
 		
 	}
 	public boolean isCellEditable(int row, int column){
@@ -141,8 +144,8 @@ public class selectFlight extends JFrame {
 			
 			public void run() {
 				try {
-					selectFlight frame1 = new selectFlight(data,retdata, headers, yes,a,b,c );
-					frame1.setVisible(true);
+					selectFlight window = new selectFlight(data,retdata, headers, yes,a,b,c );
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

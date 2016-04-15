@@ -2,6 +2,7 @@ package search;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,7 +27,7 @@ public class Booking extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Booking( int nrOfP, String flightNrTo, String flightNrFr, String depDate, String arDate ) {
+	public Booking( int nrOfP, String flightNrTo, String flightNrFr, Date deDate, Date arDate ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 500);
 		contentPane = new JPanel();
@@ -95,7 +96,7 @@ public class Booking extends JFrame {
 		contentPane.add(seatNumber);
 	}
 	public static void getFlightInfo( final String flightNrTo, final String flightNrFr, final int nrOfP,
-			final int nrOfIn, final String deDate, final String arDate ){
+			final int nrOfIn, final Date deDate, final Date arDate ){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

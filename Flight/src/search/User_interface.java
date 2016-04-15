@@ -46,7 +46,7 @@ import javax.swing.event.ChangeEvent;
 
 public class User_interface {
 
-	private JFrame frame;
+	JFrame frame;
 	FlightSearch fs = new FlightSearch();
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	boolean yes = false;
