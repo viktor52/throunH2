@@ -46,7 +46,9 @@ public class selectFlight extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public selectFlight(Vector<Vector<Object>> data2,Vector<Vector<Object>> retdata2, Vector<String> headers2, final boolean yes) {
+	public selectFlight(Vector<Vector<Object>> data2,Vector<Vector<Object>> retdata2, Vector<String> headers2, 
+			final boolean yes, final int a, final int b, final int c ) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 550);
 		contentPane = new JPanel();
@@ -58,6 +60,8 @@ public class selectFlight extends JFrame {
         JLabel lblNewLabel = new JLabel("Departing flights");
         lblNewLabel.setBounds(217, 3, 120, 15);
         contentPane.add(lblNewLabel);
+        
+      
         
         final JTable table = new JTable( data2, headers2 ){
         	  public boolean isCellEditable(int row, int column){
@@ -109,6 +113,7 @@ public class selectFlight extends JFrame {
 					d[i] = table.getValueAt(row, i);
 				}
 				System.out.println((String)d[0]);
+				String arDate = null;
 				if(yes){
 					int rerow =table2.getSelectedRow();
 					int recolumn = table2.getColumnCount();
@@ -117,7 +122,11 @@ public class selectFlight extends JFrame {
 						re[i] = table2.getValueAt(row, i);
 					}
 					System.out.println((String)re[0]);
+					arDate = (String) re[3];
 				}
+				String deDate = (String) d[3];
+				
+				
 			}
 		});
 		nextStep.setBounds(248, 476, 66, 25);
@@ -127,12 +136,12 @@ public class selectFlight extends JFrame {
 	public boolean isCellEditable(int row, int column){
 		return false;
 	}
-	public static void getInfo(Date f,Date t, int a, int b, int c, String til, String fra, final boolean yes){
+	public static void getInfo(Date f,Date t,final int a,final int b, final int c, String til, String fra, final boolean yes){
 		EventQueue.invokeLater(new Runnable() {
 			
 			public void run() {
 				try {
-					selectFlight frame1 = new selectFlight(data,retdata, headers, yes );
+					selectFlight frame1 = new selectFlight(data,retdata, headers, yes,a,b,c );
 					frame1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
