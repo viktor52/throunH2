@@ -163,9 +163,9 @@ public class User_interface {
 		JButton btnLeit = new JButton("Search");
 		btnLeit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = adult.getSelectedIndex()+1;
-				int b = children.getSelectedIndex()+1;
-				int c = infants.getSelectedIndex()+1;
+				int a = adult.getSelectedIndex();
+				int b = children.getSelectedIndex();
+				int c = infants.getSelectedIndex();
 				String fra = from.getSelectedItem().toString();
 				String til = todest.getSelectedItem().toString();
 				Date f = Departure.getDate();

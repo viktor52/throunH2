@@ -3,6 +3,7 @@ package search;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -128,7 +129,10 @@ public class selectFlight extends JFrame {
 				int nrOfP = a+b;
 				int nrOfIn = c;
 				String flightNrTo = (String) d[0];
-				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate);
+				Person per = null;
+				List<Person> LOP = new ArrayList<Person>();
+				
+				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate, LOP);
 				frame.dispose();
 			}
 		});
@@ -136,9 +140,7 @@ public class selectFlight extends JFrame {
 		frame.getContentPane().add(nextStep);
 		
 	}
-	public boolean isCellEditable(int row, int column){
-		return false;
-	}
+
 	public static void getInfo(Date f,Date t,final int a,final int b, final int c, String til, String fra, final boolean yes){
 		EventQueue.invokeLater(new Runnable() {
 			

@@ -6,11 +6,11 @@ public class Person {
 	private String name;
 	private String birthday;
 	private String email;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String seat;
 	private int orderNumber;
 	
-	public Person( String name, String birthday, String email, int phoneNumber, String seat, int orderNumber ){
+	public Person( String name, String birthday, String email, String phoneNumber, String seat, int orderNumber ){
 		
 		this.name = name;
 		this.birthday = birthday;
@@ -32,7 +32,7 @@ public class Person {
 		
 		return email;
 	}
-	public int getPhoneNumber(){
+	public String getPhoneNumber(){
 		
 		return phoneNumber;
 	}
