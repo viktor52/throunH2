@@ -14,31 +14,19 @@ import javax.swing.JComboBox;
 public class Booking extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField name;
+	private JTextField birthday;
+	private JTextField phoneNumber;
+	private JTextField email;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Booking frame = new Booking();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Booking() {
+	public Booking( int nrOfP, String flightNrTo, String flightNrFr, String depDate, String arDate ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 500);
 		contentPane = new JPanel();
@@ -70,25 +58,25 @@ public class Booking extends JFrame {
 		lblEmail.setBounds(31, 252, 61, 16);
 		contentPane.add(lblEmail);
 		
-		textField = new JTextField();
-		textField.setBounds(154, 108, 258, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		name = new JTextField();
+		name.setBounds(154, 108, 258, 26);
+		contentPane.add(name);
+		name.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(154, 152, 130, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		birthday = new JTextField();
+		birthday.setBounds(154, 152, 130, 26);
+		contentPane.add(birthday);
+		birthday.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(154, 198, 130, 26);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		phoneNumber = new JTextField();
+		phoneNumber.setBounds(154, 198, 130, 26);
+		contentPane.add(phoneNumber);
+		phoneNumber.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(154, 247, 130, 26);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		email = new JTextField();
+		email.setBounds(154, 247, 130, 26);
+		contentPane.add(email);
+		email.setColumns(10);
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setBounds(31, 347, 117, 29);
@@ -102,8 +90,23 @@ public class Booking extends JFrame {
 		lblSeat.setBounds(31, 303, 92, 16);
 		contentPane.add(lblSeat);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(154, 299, 130, 27);
-		contentPane.add(comboBox);
+		JComboBox seatNumber = new JComboBox();
+		seatNumber.setBounds(154, 299, 130, 27);
+		contentPane.add(seatNumber);
+	}
+	public static void getFlightInfo( final String flightNrTo, final String flightNrFr, final int nrOfP,
+			final int nrOfIn, final String deDate, final String arDate ){
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Booking frame = new Booking( nrOfP, flightNrTo, flightNrFr, deDate, arDate );
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
 	}
 }
