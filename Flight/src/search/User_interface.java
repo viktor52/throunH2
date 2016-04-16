@@ -123,12 +123,12 @@ public class User_interface {
 		
 		
 		final JComboBox adult = new JComboBox();
-		adult.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
+		adult.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
 		adult.setBounds(19, 110, 61, 27);
 		frame.getContentPane().add(adult);
 		
 		final JComboBox children = new JComboBox();
-		children.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
+		children.setModel(new DefaultComboBoxModel(new String[] {"0","1", "2", "3", "4", "5", "6", "7"}));
 		children.setBounds(134, 110, 61, 27);
 		frame.getContentPane().add(children);
 		
@@ -141,7 +141,7 @@ public class User_interface {
 		frame.getContentPane().add(lblChildren);
 		
 		final JComboBox infants = new JComboBox();
-		infants.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7"}));
+		infants.setModel(new DefaultComboBoxModel(new String[] {"0","1", "2", "3", "4", "5", "6", "7"}));
 		infants.setBounds(19, 164, 61, 27);
 		frame.getContentPane().add(infants);
 		
@@ -163,7 +163,7 @@ public class User_interface {
 		JButton btnLeit = new JButton("Search");
 		btnLeit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = adult.getSelectedIndex();
+				int a = adult.getSelectedIndex()+1;
 				int b = children.getSelectedIndex();
 				int c = infants.getSelectedIndex();
 				String fra = from.getSelectedItem().toString();
