@@ -39,7 +39,7 @@ public class Booking extends JFrame {
 	 * Create the frame.
 	 */
 	public Booking( final int nrOfP, final String flightNrTo, final String flightNrFr,final Date deDate, final Date arDate, final int nrOfIn
-			, final List<Person> LOP, final int on) {
+			, final List<Person> LOP, final int on, final boolean yes) {
 		frame = new JFrame();
 		final int counter = nrOfP -1;
 		boolean isVisible = false;
@@ -114,7 +114,7 @@ public class Booking extends JFrame {
 				
 			}
 		});
-		btnSubmit.setBounds(295, 347, 117, 29);
+		btnSubmit.setBounds(295, 413, 117, 29);
 		frame.getContentPane().add(btnSubmit);
 		if(nrOfP == 1) isVisible = true;
 		btnSubmit.setVisible(isVisible);
@@ -132,31 +132,41 @@ public class Booking extends JFrame {
 				Person per;
 				per = new Person(Name, Birthday, PhoneNumber, Email, Seat, ordernr,flightNrTo);
 				LOP.add(per);
-				getFlightInfo(flightNrTo, flightNrFr,counter,nrOfIn,deDate,arDate, LOP, on);
+				getFlightInfo(flightNrTo, flightNrFr,counter,nrOfIn,deDate,arDate, LOP, on, yes);
 				frame.dispose();
 			}
 		});
-		btnNext.setBounds(31, 347, 117, 29);
+		btnNext.setBounds(31, 413, 117, 29);
 		frame.getContentPane().add(btnNext);
 		if(nrOfP == 1) vis = false;
 		btnNext.setVisible(vis);
 		
 
 		
-		JLabel lblSeat = new JLabel("Seat Number");
-		lblSeat.setBounds(31, 303, 92, 16);
+		JLabel lblSeat = new JLabel("Seat Number Departing");
+		lblSeat.setBounds(31, 303, 171, 16);
 		frame.getContentPane().add(lblSeat);
 		
-		JComboBox seatNumber = new JComboBox();
-		seatNumber.setBounds(154, 299, 130, 27);
-		frame.getContentPane().add(seatNumber);
+		JComboBox seatNumberDep = new JComboBox();
+		seatNumberDep.setBounds(282, 299, 130, 27);
+		frame.getContentPane().add(seatNumberDep);
+		
+		JLabel lblSeatNumberArri = new JLabel("Seat Number Returning");
+		lblSeatNumberArri.setBounds(31, 346, 160, 16);
+		frame.getContentPane().add(lblSeatNumberArri);
+		lblSeatNumberArri.setVisible(yes);
+		
+		JComboBox seatNumberRet = new JComboBox();
+		seatNumberRet.setBounds(282, 342, 130, 27);
+		frame.getContentPane().add(seatNumberRet);
+		seatNumberRet.setVisible(yes);
 	}
 	public static void getFlightInfo( final String flightNrTo, final String flightNrFr, final int nrOfP,
-			final int nrOfIn, final Date deDate, final Date arDate, final List<Person> LOP, final int on){
+			final int nrOfIn, final Date deDate, final Date arDate, final List<Person> LOP, final int on, final boolean yes){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Booking Window = new Booking( nrOfP, flightNrTo, flightNrFr, deDate, arDate, nrOfIn, LOP, on );
+					Booking Window = new Booking( nrOfP, flightNrTo, flightNrFr, deDate, arDate, nrOfIn, LOP, on, yes );
 					Window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -166,5 +176,4 @@ public class Booking extends JFrame {
 		
 		
 	}
-	
 }

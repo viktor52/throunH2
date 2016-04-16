@@ -150,7 +150,7 @@ public class selectFlight extends JFrame {
 				Person per = null;
 				List<Person> LOP = new ArrayList<Person>();
 				int on = orderNumber()+1;
-				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate, LOP, on);
+				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate, LOP, on, yes);
 				frame.dispose();
 			}
 		});
