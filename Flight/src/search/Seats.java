@@ -1,10 +1,10 @@
 package search;
 
+import java.util.List;
+
 public interface Seats {
-	public boolean isAvailable(String seatString);
-	public String[] getEmpty();
-	public String seatToString(int row, int col);
-	public int[] stringToSeat(String seatString);
-	public void makeSeatFalse(String seatString);
+
+	public void makeSeatFalse(List LOP);
+	List getAvailable(String flightnumber);
 	
 }
