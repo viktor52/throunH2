@@ -1,6 +1,7 @@
 package search;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import search.Person;
+import search.InsertInDB;
 public class Booking extends JFrame {
 
 	private JPanel contentPane;
@@ -99,8 +101,11 @@ public class Booking extends JFrame {
 				String Seat = "1-A";
 				int ordernr = 1;
 				Person pers;
-				pers = new Person(Name, Birthday, PhoneNumber, Email, Seat, ordernr);
+				pers = new Person(Name, Birthday,Email, PhoneNumber, Seat, ordernr);
 				LOP.add(pers);
+				InsertInDB.insertOrder(LOP);
+				frame.dispose();
+				
 			}
 		});
 		btnSubmit.setBounds(295, 347, 117, 29);

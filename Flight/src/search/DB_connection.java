@@ -28,5 +28,21 @@ public class DB_connection {
     System.out.println("Opened database successfully");
     return rs;
 	}
+	
+	public boolean insert(String Q){ 
+	    try {
+	       Class.forName("org.postgresql.Driver");
+	       c = DriverManager.getConnection(url, user, pass);
+	       stmt = c.createStatement();
+		   stmt.executeUpdate( Q );
+		       return true;
+	    } catch (Exception e) {
+	       e.printStackTrace();
+	       System.err.println(e.getClass().getName()+": "+e.getMessage());
+	       System.exit(0);
+	    }
+	    System.out.println("Opened database successfully");
+	    return false;
+		}
 
 }
