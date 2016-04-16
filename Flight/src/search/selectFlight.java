@@ -130,23 +130,23 @@ public class selectFlight extends JFrame {
 				}
 				System.out.println((String)d[0]);
 				Date arDate = null;
-				String flightNrFr = null;
+				String flightNrTo = null;
 				if(yes){
 					int rerow =table2.getSelectedRow();
 					int recolumn = table2.getColumnCount();
 					Object [] re = new Object[recolumn];
 					for(int i = 0; i<recolumn;i++){
-						re[i] = table2.getValueAt(row, i);
+						re[i] = table2.getValueAt(rerow, i);
 					}
 					System.out.println((String)re[0]);
 					arDate = (Date) re[3];
-					flightNrFr = (String) re[0];
+					flightNrTo = (String) re[0];
 					
 				}
 				Date deDate = (Date) d[3];
 				int nrOfP = a+b;
 				int nrOfIn = c;
-				String flightNrTo = (String) d[0];
+				String flightNrFr = (String) d[0];
 				Person per = null;
 				List<Person> LOP = new ArrayList<Person>();
 				int on = orderNumber()+1;

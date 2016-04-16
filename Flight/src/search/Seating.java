@@ -14,20 +14,21 @@ public class Seating implements Seats {
 	DB_connection db = new DB_connection();
 	
 	@Override
-	public void makeSeatFalse(List LOP) {
+	public void makeDepSeatFalse(List<Person> LOP) {
 		Iterator<Person> iter = LOP.iterator();
 		while(iter.hasNext()){
 			Person per = iter.next();
-			db.insert("UPDATE seats SET avilable = FALSE WHERE flightnumber = '"+per.getFlightNumber()+"' AND seatnumber = '"+per.getSeat()+"'");
+			db.insert("UPDATE seats SET avilable = FALSE WHERE flightnumber = '"+per.getDepFlightNumber()+"'"
+					+ " AND seatnumber = '"+per.getDepSeat()+"'");
 		}
 	}
 
 	@Override
-	public List getAvailable(String flightnumber) {
-		List avaliable = new ArrayList();
+	public List<String> getAvailable(String flightnumber) {
+		List<String> avaliable = new ArrayList<String>();
 		
 		try {
-			ResultSet rs = db.find("SELECT * FROM avilable WHERE flightnumber = '"+flightnumber+"' AND avilable = TRUE");
+			ResultSet rs = db.find("SELECT * FROM seats WHERE flightnumber = '"+flightnumber+"' AND avilable = TRUE");
 			while(rs.next()){
 				String s = rs.getString("seatnumber");
 				avaliable.add(s);
@@ -39,6 +40,18 @@ public class Seating implements Seats {
 		
 		return avaliable;
 	}
+
+	@Override
+	public void makeRetSeatFalse(List<Person> LOP) {
+		Iterator<Person> iter = LOP.iterator();
+		while(iter.hasNext()){
+			Person per = iter.next();
+			db.insert("UPDATE seats SET avilable = FALSE WHERE flightnumber = '"+per.getRetFlightNumber()+"'"
+					+ " AND seatnumber = '"+per.getArSeat()+"'");
+		}
+		
+	}
+
 
 
 

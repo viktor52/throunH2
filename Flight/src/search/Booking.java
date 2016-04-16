@@ -5,13 +5,16 @@ import search.DB_connection;
 
 import java.awt.EventQueue;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
@@ -21,6 +24,10 @@ import java.sql.SQLException;
 
 import search.Person;
 import search.InsertInDB;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import search.Seating;
+import search.InsertInDB;
 public class Booking extends JFrame {
 
 	private JPanel contentPane;
@@ -29,7 +36,7 @@ public class Booking extends JFrame {
 	private JTextField birthday;
 	private JTextField phoneNumber;
 	private JTextField email;
-
+	Seating seat = new Seating();
 
 	/**
 	 * Launch the application.
@@ -42,13 +49,33 @@ public class Booking extends JFrame {
 			, final List<Person> LOP, final int on, final boolean yes) {
 		frame = new JFrame();
 		final int counter = nrOfP -1;
+		
 		boolean isVisible = false;
 		boolean vis = true;
-		 
+		Vector<String> headers = new Vector<String>(5);
+		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		
+		headers.add("Name");
+		headers.add("Depart Seatnumber");
+		headers.add("Depart flight");
+		headers.add("Return Seatnumber");
+		headers.add("Return flight");
+		
+		List<Person> ad = LOP;
+		Iterator<Person> itr = ad.iterator();
+		
+		while(itr.hasNext()){
+			Person k  = itr.next();
+	        Vector<Object> row = new Vector<Object>();
+	        row.add(k.getName() );
+	        row.add(k.getDepSeat());
+	        row.add(k.getDepFlightNumber() );
+	        row.add(k.getArSeat());
+	        row.add(k.getRetFlightNumber());
+	        data.add(row);
+		}
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 450, 500);
-		//contentPane = new JPanel();
-		//frame.setBorder(new EmptyBorder(5, 5, 5, 5));
+		frame.setBounds(100, 100, 450, 750);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Booking form");
@@ -95,6 +122,27 @@ public class Booking extends JFrame {
 		frame.getContentPane().add(email);
 		email.setColumns(10);
 		
+		JLabel lblSeat = new JLabel("Seat Number Departing");
+		lblSeat.setBounds(31, 303, 171, 16);
+		frame.getContentPane().add(lblSeat);
+		
+		List<String> dep = seat.getAvailable(flightNrFr);
+		final JComboBox seatNumberDep = new JComboBox();
+		seatNumberDep.setBounds(282, 299, 130, 27);
+		seatNumberDep.setModel(new DefaultComboBoxModel(dep.toArray()));
+		frame.getContentPane().add(seatNumberDep);
+
+		JLabel lblSeatNumberArri = new JLabel("Seat Number Returning");
+		lblSeatNumberArri.setBounds(31, 346, 160, 16);
+		frame.getContentPane().add(lblSeatNumberArri);
+		lblSeatNumberArri.setVisible(yes);
+		
+		List<String> ret = seat.getAvailable(flightNrTo);
+		final JComboBox seatNumberRet = new JComboBox();
+		seatNumberRet.setBounds(282, 342, 130, 27);
+		seatNumberRet.setModel(new DefaultComboBoxModel(ret.toArray()));
+		frame.getContentPane().add(seatNumberRet);
+		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -103,13 +151,24 @@ public class Booking extends JFrame {
 				String Birthday = birthday.getText();
 				String PhoneNumber = phoneNumber.getText();
 				String Email = email.getText();
-				String Seat = "1-A";
+				String depSeat = (String)seatNumberDep.getSelectedItem();
+				String retSeat = (String)seatNumberRet.getSelectedItem();
+				List<Person> count = LOP;
+				Iterator<Person> itr = count.iterator();
+				int counting = 1;
+				while(itr.hasNext()){
+					itr.next();
+					counting++;
+				}
 				int ordernr = on;
 				Person pers;
-				pers = new Person(Name, Birthday,Email, PhoneNumber, Seat, ordernr,flightNrTo);
+				pers = new Person(Name, Birthday, PhoneNumber, Email, depSeat,retSeat ,ordernr,flightNrFr,flightNrTo);
 				LOP.add(pers);
 				InsertInDB.insertOrder(LOP);
-				
+				seat.makeDepSeatFalse(LOP);
+				seat.makeRetSeatFalse(LOP);
+				InsertInDB.updateSeats(flightNrFr, counting);
+				InsertInDB.updateSeats(flightNrTo, counting);
 				frame.dispose();
 				
 			}
@@ -119,6 +178,7 @@ public class Booking extends JFrame {
 		if(nrOfP == 1) isVisible = true;
 		btnSubmit.setVisible(isVisible);
 		
+		
 		JButton btnNext = new JButton("Next");
 		btnNext.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,10 +187,11 @@ public class Booking extends JFrame {
 				String Birthday = birthday.getText();
 				String PhoneNumber = phoneNumber.getText();
 				String Email = email.getText();
-				String Seat = "1-A";
+				String depSeat = (String)seatNumberDep.getSelectedItem();
+				String retSeat = (String)seatNumberRet.getSelectedItem();
 				int ordernr = on;
 				Person per;
-				per = new Person(Name, Birthday, PhoneNumber, Email, Seat, ordernr,flightNrTo);
+				per = new Person(Name, Birthday, PhoneNumber, Email, depSeat,retSeat ,ordernr,flightNrFr,flightNrTo);
 				LOP.add(per);
 				getFlightInfo(flightNrTo, flightNrFr,counter,nrOfIn,deDate,arDate, LOP, on, yes);
 				frame.dispose();
@@ -141,25 +202,22 @@ public class Booking extends JFrame {
 		if(nrOfP == 1) vis = false;
 		btnNext.setVisible(vis);
 		
-
 		
-		JLabel lblSeat = new JLabel("Seat Number Departing");
-		lblSeat.setBounds(31, 303, 171, 16);
-		frame.getContentPane().add(lblSeat);
 		
-		JComboBox seatNumberDep = new JComboBox();
-		seatNumberDep.setBounds(282, 299, 130, 27);
-		frame.getContentPane().add(seatNumberDep);
 		
-		JLabel lblSeatNumberArri = new JLabel("Seat Number Returning");
-		lblSeatNumberArri.setBounds(31, 346, 160, 16);
-		frame.getContentPane().add(lblSeatNumberArri);
-		lblSeatNumberArri.setVisible(yes);
+		final JTable table = new JTable( data, headers ){
+			  public boolean isCellEditable(int row, int column){
+				    return false;
+				  }
+		};
+		table.setVisible(true);
+		frame.getContentPane().add(table);
 		
-		JComboBox seatNumberRet = new JComboBox();
-		seatNumberRet.setBounds(282, 342, 130, 27);
-		frame.getContentPane().add(seatNumberRet);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(31, 476, 381, 154);
+		frame.getContentPane().add(scrollPane);
 		seatNumberRet.setVisible(yes);
+		
 	}
 	public static void getFlightInfo( final String flightNrTo, final String flightNrFr, final int nrOfP,
 			final int nrOfIn, final Date deDate, final Date arDate, final List<Person> LOP, final int on, final boolean yes){

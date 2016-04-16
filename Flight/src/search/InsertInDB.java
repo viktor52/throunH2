@@ -14,12 +14,17 @@ public class InsertInDB {
 		while(iter.hasNext()){
 			Person per = iter.next();
 			
-			db.insert("INSERT INTO orders(name, birthday, email,phonenumber,seatnumber,ordernumber,flightnumber) VALUES('"+per.getName()+"', "
-					+ "'"+per.getBirthday()+"', '"+per.getEmail()+"','"+per.getPhoneNumber()+"','"+per.getSeat()+"', '"+per.getOrderNumber()+"','"+per.getFlightNumber()+"')");
+			db.insert("INSERT INTO orders(name, birthday, email,phonenumber,depseatnumber,depflight,arseatnumber,arflight,ordernumber) VALUES('"+per.getName()+"', "
+					+ "'"+per.getBirthday()+"', '"+per.getEmail()+"','"+per.getPhoneNumber()+"','"+per.getDepSeat()+"', '"+per.getDepFlightNumber()+"','"+per.getArSeat()+"',"
+							+ "'"+per.getRetFlightNumber()+"','"+per.getOrderNumber()+"')");
 					
 			System.out.println(per.getName());
 		}
 		
+	}
+	
+	public static void updateSeats(String flightNumber, int NumOfP){
+		db.insert("UPDATE flight SET seats = seats -"+NumOfP+" WHERE number = '"+flightNumber+"' ");
 	}
 	
 	

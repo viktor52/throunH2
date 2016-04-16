@@ -7,19 +7,23 @@ public class Person {
 	private String birthday;
 	private String email;
 	private String phoneNumber;
-	private String seat;
+	private String depSeat;
+	private String arSeat;
 	private int orderNumber;
-	private String flightNumber;
+	private String retflightNumber;
+	private String depflightNumber;
 	
-	public Person( String name, String birthday, String email, String phoneNumber, String seat, int orderNumber, String flightNumber ){
+	public Person( String name, String birthday, String email, String phoneNumber, String depSeat, String arSeat, int orderNumber, String depflightNumber,String retflightNumber ){
 		
 		this.name = name;
 		this.birthday = birthday;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.seat = seat;
+		this.depSeat = depSeat;
+		this.arSeat = arSeat;
 		this.orderNumber = orderNumber;
-		this.flightNumber = flightNumber;
+		this.retflightNumber = retflightNumber;
+		this.depflightNumber = depflightNumber;
 	}
 	
 	public String getName(){
@@ -38,15 +42,22 @@ public class Person {
 		
 		return phoneNumber;
 	}
-	public String getSeat(){
+	public String getDepSeat(){
 		
-		return seat;
+		return depSeat;
+	}
+	public String getArSeat(){
+		
+		return arSeat;
 	}
 	public int getOrderNumber(){
 		
 		return orderNumber;
 	}
-	public String getFlightNumber(){
-		return flightNumber;
+	public String getRetFlightNumber(){
+		return retflightNumber;
+	}
+	public String getDepFlightNumber(){
+		return depflightNumber;
 	}
 }
