@@ -14,8 +14,8 @@ public class InsertInDB {
 		while(iter.hasNext()){
 			Person per = iter.next();
 			
-			db.insert("INSERT INTO orders(name, birthday, email,phonenumber,seatnumber,ordernumber) VALUES('"+per.getName()+"', "
-					+ "'"+per.getBirthday()+"', '"+per.getEmail()+"','"+per.getPhoneNumber()+"','"+per.getSeat()+"', '"+per.getOrderNumber()+"')");
+			db.insert("INSERT INTO orders(name, birthday, email,phonenumber,seatnumber,ordernumber,flightnumber) VALUES('"+per.getName()+"', "
+					+ "'"+per.getBirthday()+"', '"+per.getEmail()+"','"+per.getPhoneNumber()+"','"+per.getSeat()+"', '"+per.getOrderNumber()+"','"+per.getFlightNumber()+"')");
 					
 			System.out.println(per.getName());
 		}

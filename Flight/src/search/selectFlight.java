@@ -24,6 +24,8 @@ import java.awt.FlowLayout;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import search.Booking;
@@ -40,7 +42,23 @@ public class selectFlight extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-
+	static DB_connection db = new DB_connection();
+	public static int orderNumber(){
+		String o = "ordernumber";
+		int a = 0;
+		ResultSet rs = db.find("SELECT MAX(ordernumber) AS "+o+" FROM orders");
+		try {
+			while(rs.next()){
+				a = rs.getInt(o);
+				System.out.println(a);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
 
 	/**
 	 * Create the frame.
@@ -131,8 +149,8 @@ public class selectFlight extends JFrame {
 				String flightNrTo = (String) d[0];
 				Person per = null;
 				List<Person> LOP = new ArrayList<Person>();
-				
-				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate, LOP);
+				int on = orderNumber()+1;
+				Booking.getFlightInfo(flightNrTo, flightNrFr, nrOfP, nrOfIn, deDate, arDate, LOP, on);
 				frame.dispose();
 			}
 		});

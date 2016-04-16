@@ -9,8 +9,9 @@ public class Person {
 	private String phoneNumber;
 	private String seat;
 	private int orderNumber;
+	private String flightNumber;
 	
-	public Person( String name, String birthday, String email, String phoneNumber, String seat, int orderNumber ){
+	public Person( String name, String birthday, String email, String phoneNumber, String seat, int orderNumber, String flightNumber ){
 		
 		this.name = name;
 		this.birthday = birthday;
@@ -18,6 +19,7 @@ public class Person {
 		this.phoneNumber = phoneNumber;
 		this.seat = seat;
 		this.orderNumber = orderNumber;
+		this.flightNumber = flightNumber;
 	}
 	
 	public String getName(){
@@ -43,5 +45,8 @@ public class Person {
 	public int getOrderNumber(){
 		
 		return orderNumber;
+	}
+	public String getFlightNumber(){
+		return flightNumber;
 	}
 }

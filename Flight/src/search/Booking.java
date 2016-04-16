@@ -1,6 +1,7 @@
 package search;
 
 import java.awt.BorderLayout;
+import search.DB_connection;
 
 import java.awt.EventQueue;
 import java.util.Date;
@@ -15,6 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import search.Person;
 import search.InsertInDB;
 public class Booking extends JFrame {
@@ -26,6 +30,7 @@ public class Booking extends JFrame {
 	private JTextField phoneNumber;
 	private JTextField email;
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -34,7 +39,7 @@ public class Booking extends JFrame {
 	 * Create the frame.
 	 */
 	public Booking( final int nrOfP, final String flightNrTo, final String flightNrFr,final Date deDate, final Date arDate, final int nrOfIn
-			, final List<Person> LOP) {
+			, final List<Person> LOP, final int on) {
 		frame = new JFrame();
 		final int counter = nrOfP -1;
 		boolean isVisible = false;
@@ -99,11 +104,12 @@ public class Booking extends JFrame {
 				String PhoneNumber = phoneNumber.getText();
 				String Email = email.getText();
 				String Seat = "1-A";
-				int ordernr = 1;
+				int ordernr = on;
 				Person pers;
-				pers = new Person(Name, Birthday,Email, PhoneNumber, Seat, ordernr);
+				pers = new Person(Name, Birthday,Email, PhoneNumber, Seat, ordernr,flightNrTo);
 				LOP.add(pers);
 				InsertInDB.insertOrder(LOP);
+				
 				frame.dispose();
 				
 			}
@@ -122,11 +128,11 @@ public class Booking extends JFrame {
 				String PhoneNumber = phoneNumber.getText();
 				String Email = email.getText();
 				String Seat = "1-A";
-				int ordernr = 1;
+				int ordernr = on;
 				Person per;
-				per = new Person(Name, Birthday, PhoneNumber, Email, Seat, ordernr);
+				per = new Person(Name, Birthday, PhoneNumber, Email, Seat, ordernr,flightNrTo);
 				LOP.add(per);
-				getFlightInfo(flightNrTo, flightNrFr,counter,nrOfIn,deDate,arDate, LOP);
+				getFlightInfo(flightNrTo, flightNrFr,counter,nrOfIn,deDate,arDate, LOP, on);
 				frame.dispose();
 			}
 		});
@@ -146,11 +152,11 @@ public class Booking extends JFrame {
 		frame.getContentPane().add(seatNumber);
 	}
 	public static void getFlightInfo( final String flightNrTo, final String flightNrFr, final int nrOfP,
-			final int nrOfIn, final Date deDate, final Date arDate, final List<Person> LOP){
+			final int nrOfIn, final Date deDate, final Date arDate, final List<Person> LOP, final int on){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Booking Window = new Booking( nrOfP, flightNrTo, flightNrFr, deDate, arDate, nrOfIn, LOP );
+					Booking Window = new Booking( nrOfP, flightNrTo, flightNrFr, deDate, arDate, nrOfIn, LOP, on );
 					Window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -160,4 +166,5 @@ public class Booking extends JFrame {
 		
 		
 	}
+	
 }
