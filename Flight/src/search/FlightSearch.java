@@ -44,12 +44,13 @@ public class FlightSearch {
 		eDate = df.format(cal.getTime());
 			Flight s = null;
 		    List<Flight> dflight= new ArrayList<Flight>();
+		    int ppltraveling = adult+children;
 		    try {
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-		    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
+		    			+ "AND departureairport = '"+ From +"'AND seats >= '"+ppltraveling+"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
 			      while ( rs.next() ) {
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
-			            		rs.getDate("depdate"),rs.getString("price"));
+			            		rs.getDate("depdate"),rs.getInt("price"));
 			            dflight.add(s);
 			            
 			         }
@@ -92,12 +93,13 @@ public class FlightSearch {
 		
 		Flight s = null;
 	    List<Flight> rflight= new ArrayList<Flight>();
+	    int ppltraveling = adult+children;
 	    try {
 	    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
-	    			+ "AND departureairport = '"+ From +"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
+	    			+ "AND departureairport = '"+ From +"'AND seats >= '"+ppltraveling+"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
 		      while ( rs.next() ) {
 		            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
-		            		rs.getDate("depdate"),rs.getString("price"));
+		            		rs.getDate("depdate"),rs.getInt("price"));
 		            System.out.println(rs.getDate("depdate"));
 		            rflight.add(s);
 		         }
