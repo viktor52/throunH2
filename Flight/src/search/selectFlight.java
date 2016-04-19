@@ -181,8 +181,10 @@ public class selectFlight extends JFrame {
 		        row.add( k.getflightNO());
 		        row.add( k.getfrom());
 		        row.add( k.getTo());
-		        row.add(k.getDepartureTime());
+		        row.add(k.getDepartureDate());
 		        row.add(k.getPrice());
+		        String [] s = k.getCompanyInfo();
+		        System.out.println(s[0]+", "+s[1]+", "+s[2]);
 		        data.add(row);
 			}
 			
@@ -197,8 +199,10 @@ public class selectFlight extends JFrame {
 				    row.add( k.getflightNO());
 				    row.add( k.getfrom());
 				    row.add( k.getTo());
-			        row.add(k.getDepartureTime());
+			        row.add(k.getDepartureDate());
 			        row.add(k.getPrice());
+			        String [] s = k.getCompanyInfo();
+			        System.out.println(s[0]+", "+s[1]+", "+s[2]);
 			        retdata.add(row);
 				}
 			}

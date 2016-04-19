@@ -4,27 +4,34 @@ import java.util.Date;
 public class Flight {
 	
 	private String flightNO;
-	private Date DepartureTime;
-	private Date ArrivalTime;
+	private Date DepartureDate;
+	private String ArrivalTime;
+	private String DepartureTime;
+	private String [] CompanyInfo;
 	private int Price;
 	private String to;
 	private String from;
 	private int seatsAvailable;
 	
-	public Flight(String flightNO,  String from, String to,  Date DepartureTime, int Price){
+	public Flight(String flightNO,  String from, String to,  Date DepartureDate, int Price, String DepartureTime, String ArrivalTime, String [] CompanyInfo){
 		this.flightNO = flightNO;
+		this.DepartureDate = DepartureDate;
 		this.DepartureTime = DepartureTime;
 		this.ArrivalTime = ArrivalTime;
+		this.CompanyInfo = CompanyInfo;
 		this.Price = Price;
 		this.to = to;
 		this.from = from;
 		this.seatsAvailable = seatsAvailable;
 	}
 	
-	public Date getDepartureTime(){
+	public Date getDepartureDate(){
+		return DepartureDate;
+	}
+	public String getDepartureTime(){
 		return DepartureTime;
 	}
-	public Date getArrivalTime(){
+	public String getArrivalTime(){
 		return ArrivalTime;
 	}
 	public String getflightNO(){
@@ -41,5 +48,8 @@ public class Flight {
 	}
 	public int getSeatsAvailable(){
 		return seatsAvailable;
+	}
+	public String [] getCompanyInfo(){
+		return CompanyInfo;
 	}
 }

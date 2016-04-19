@@ -33,7 +33,7 @@ public class MockSeating implements Seats {
 			for(int u = 0; u < col; u++){
 				if(seats[i][u] = true){
 					counter++;
-				}
+				} 
 			}
 		}
 		String[] emptyArray = new String[counter];

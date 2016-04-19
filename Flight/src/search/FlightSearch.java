@@ -43,14 +43,24 @@ public class FlightSearch {
 		cal.add(Calendar.DATE, 3);
 		eDate = df.format(cal.getTime());
 			Flight s = null;
+			List<String> lis = new ArrayList<String>();
 		    List<Flight> dflight= new ArrayList<Flight>();
 		    int ppltraveling = adult+children;
 		    try {
+		    	ResultSet c;
 		    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
 		    			+ "AND departureairport = '"+ From +"'AND seats >= '"+ppltraveling+"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
-			      while ( rs.next() ) {
+		    	
+		    	while ( rs.next() ) {
+		    		  c = db.find("SELECT * FROM company WHERE flightnumber = '"+rs.getString("number")+"'");
+			    	   while(c.next()){
+		    			lis.add(c.getString("airline"));
+		    			lis.add(c.getString("phonenumber"));
+		    			lis.add(c.getString("website"));
+			    	   }
+			    	   String [] comp = lis.toArray(new String[3]);
 			            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
-			            		rs.getDate("depdate"),rs.getInt("price"));
+			            		rs.getDate("depdate"),rs.getInt("price"),rs.getString("deptime"),rs.getString("artime"), comp);
 			            dflight.add(s);
 			            
 			         }
@@ -93,13 +103,22 @@ public class FlightSearch {
 		
 		Flight s = null;
 	    List<Flight> rflight= new ArrayList<Flight>();
+	    List<String> lis= new ArrayList<String>();
 	    int ppltraveling = adult+children;
 	    try {
+	    	ResultSet c;
 	    	ResultSet rs = db.find( "SELECT * FROM flight where arivalairport = '"+ To +"' "
 	    			+ "AND departureairport = '"+ From +"'AND seats >= '"+ppltraveling+"'AND depdate BETWEEN '"+sDate+"' AND '"+eDate+"' ORDER BY depdate;" );
 		      while ( rs.next() ) {
+		    	   c = db.find("SELECT * FROM company WHERE flightnumber = '"+rs.getString("number")+"'");
+		    	   while(c.next()){
+	    			lis.add(c.getString("airline"));
+	    			lis.add(c.getString("phonenumber"));
+	    			lis.add(c.getString("website"));
+		    	   }
+		    	   String [] comp = lis.toArray(new String[3]);
 		            s = new Flight(rs.getString("number"), rs.getString("departureairport"), rs.getString("arivalairport"), 
-		            		rs.getDate("depdate"),rs.getInt("price"));
+		            		rs.getDate("depdate"),rs.getInt("price"),rs.getString("deptime"),rs.getString("artime"),comp);
 		            System.out.println(rs.getDate("depdate"));
 		            rflight.add(s);
 		         }
